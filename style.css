@@ -92,6 +92,8 @@ p {
     background: #f7fafc;
     border-radius: 15px;
     font-weight: 600;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .score {
@@ -104,8 +106,32 @@ p {
     font-size: 1rem;
 }
 
+.timer {
+    background: #f7fafc;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #38a169;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.timer span {
+    font-weight: 700;
+}
+
+.streak {
+    background: #f7fafc;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #4a5568;
+    border: 2px solid #e2e8f0;
+}
+
 .question-container {
     margin-bottom: 30px;
+    position: relative;
 }
 
 .options {
@@ -170,6 +196,109 @@ p {
     border: 1px solid #fc8181;
 }
 
+.difficulty-select {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 15px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4a5568;
+}
+
+.difficulty-select:hover {
+    border-color: #667eea;
+}
+
+.difficulty-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.hint-btn {
+    background: #f6ad55;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(246, 173, 85, 0.3);
+}
+
+.hint-btn:hover:not(:disabled) {
+    background: #ed8936;
+    transform: translateY(-1px);
+}
+
+.hint-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hint {
+    background: #e6fffa;
+    border: 1px solid #81e6d9;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+    color: #234e52;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.best-score, .games-played {
+    background: #f7fafc;
+    padding: 12px 18px;
+    border-radius: 12px;
+    margin: 8px 0;
+    font-weight: 600;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    display: inline-block;
+    margin: 5px 10px;
+}
+
+.best-score {
+    background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+    border-color: #f6ad55;
+    color: #744210;
+}
+
+.games-played {
+    background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+    border-color: #81e6d9;
+    color: #234e52;
+}
+
+.sound-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    z-index: 100;
+}
+
+.sound-toggle:hover {
+    background: #5a67d8;
+    transform: scale(1.1);
+}
+
 .final-score {
     margin: 30px 0;
     padding: 30px;
@@ -188,6 +317,41 @@ p {
     margin: 0;
 }
 
+/* Animações extras */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Efeitos especiais para acertos e erros */
+.option.correct {
+    animation: bounce 0.6s ease-out;
+}
+
+.option.incorrect {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
     .container {
         padding: 20px;
@@ -205,9 +369,53 @@ p {
     .header {
         flex-direction: column;
         gap: 10px;
+        text-align: center;
     }
     
     .options {
         grid-template-columns: 1fr;
+    }
+    
+    .sound-toggle {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .best-score, .games-played {
+        display: block;
+        margin: 5px 0;
+    }
+    
+    .timer, .streak {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header {
+        padding: 15px;
+    }
+    
+    .option {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .hint-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
     }
 } 
