@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game - Jogo de Perguntas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="start-screen" class="screen active">
+            <h1>🎮 Quiz Game</h1>
+            <p>Teste seus conhecimentos com nosso jogo de perguntas!</p>
+            <button id="start-btn" class="btn">Começar Jogo</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div class="header">
+                <div class="score">Pontuação: <span id="score">0</span></div>
+                <div class="question-counter">Pergunta <span id="current-question">1</span> de <span id="total-questions">10</span></div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text">Carregando pergunta...</h2>
+                <div id="options-container" class="options">
+                    <!-- Opções serão inseridas aqui via JavaScript -->
+                </div>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+        </div>
+
+        <div id="end-screen" class="screen">
+            <h1>🎉 Jogo Finalizado!</h1>
+            <div class="final-score">
+                <h2>Sua pontuação final: <span id="final-score">0</span></h2>
+                <p id="performance-message">Mensagem de performance</p>
+            </div>
+            <button id="restart-btn" class="btn">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
